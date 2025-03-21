@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Agregar Personal{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Agregar Personal</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        {{ form.nombre|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="apellido">Apellido</label>
+        {{ form.apellido|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        <label for="cedula">Cédula</label>
+        {{ form.cedula|add_class:"form-control" }}
+        {% if form.cedula.errors %}
+            <small class="text-danger">{{ form.cedula.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="fecha_ingreso">Fecha de Ingreso</label>
+        {{ form.fecha_ingreso|add_class:"form-control" }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'leer' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

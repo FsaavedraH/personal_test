@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# Cargamos Bootstrap y Widget Tweaks #}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% load widget_tweaks %}
+    {% load static %}
+
+    <title>{% block title %}Gestión de Personal{% endblock %}</title>
+</head>
+<body>
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>

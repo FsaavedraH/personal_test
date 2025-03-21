@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Personal{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Lista de Personal</h2>
+
+<div align="left" class="mb-3">
+    <a href="{% url 'crear' %}" class="btn btn-primary">Agregar Personal</a>
+    <a href="{% url 'reporte_asistencia' %}" class="btn btn-success">Generar Reporte</a>
+</div>
+
+<!-- Formulario para guardar cambios de asistencia -->
+<form method="post" action="{% url 'guardar_asistencia' %}">
+    {% csrf_token %}
+    
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cédula</th>
+                <th>Fecha de Ingreso</th>
+                <th>Asistencia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona in object_list %}
+            <tr>
+                <td>{{ persona.nombre }}</td>
+                <td>{{ persona.apellido }}</td>
+                <td>{{ persona.cedula }}</td>
+                <td>{{ persona.fecha_ingreso }}</td>
+                <td>
+                    <input type="checkbox" name="asistencia_{{ persona.pk }}" {% if persona.asistencia %}checked{% endif %}>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{% url 'detalles' persona.pk %}" class="btn btn-success">Ver</a>
+                        <a href="{% url 'actualizar' persona.pk %}" class="btn btn-primary">Editar</a>
+                        <form method="post" action="{% url 'eliminar' persona.pk %}" style="display:inline;">
+                           
+                        </form>
+                        <form method="post" action="{% url 'eliminar' persona.pk %}">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" type="submit">
+                                Eliminar
+                            </button>
+                        </form>
+                        
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para guardar cambios de asistencia -->
+    <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de Personal{% endblock %}
+
+{% block content %}
+<h2>Detalles del Personal</h2>
+
+<p><strong>Nombre:</strong> {{ object.nombre }}</p>
+<p><strong>Apellido:</strong> {{ object.apellido }}</p>
+<p><strong>Cédula:</strong> {{ object.cedula }}</p>
+<p><strong>Fecha de Ingreso:</strong> {{ object.fecha_ingreso }}</p>
+<p><strong>Asistencia:</strong> {{ object.asistencia|yesno:"Sí,No" }}</p>
+
+<a href="{% url 'leer' %}" class="btn btn-primary">Volver</a>
+{% endblock %}
